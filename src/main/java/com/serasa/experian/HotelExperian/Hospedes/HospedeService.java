@@ -1,5 +1,6 @@
 package com.serasa.experian.HotelExperian.Hospedes;
 
+import com.serasa.experian.HotelExperian.exceptions.HospedeJaCadastradoException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,13 +21,13 @@ public class HospedeService {
 
     public void verificaHospedePorNome(String nome) {
         if (hospedeRepository.existsByNomeHospede(nome)) {
-            throw new HospedeException("Hospede com o mesmo nome já cadastrado.");
+            throw new HospedeJaCadastradoException("Hospede com o mesmo nome já cadastrado.");
         }
     }
 
     public void verificaDocumentoHospede(String documento) {
         if (hospedeRepository.existsByDocumento(documento)) {
-            throw new HospedeException("Hóspede com o mesmo documento já cadastrado.");
+            throw new HospedeJaCadastradoException("Hóspede com o mesmo documento já cadastrado.");
         }
     }
 
