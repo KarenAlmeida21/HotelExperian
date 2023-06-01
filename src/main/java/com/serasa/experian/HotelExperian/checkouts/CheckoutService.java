@@ -4,6 +4,7 @@ import com.serasa.experian.HotelExperian.CheckIns.CheckInModel;
 import com.serasa.experian.HotelExperian.CheckIns.CheckInRepository;
 import com.serasa.experian.HotelExperian.exceptions.CheckoutNãoEncontrado;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -18,10 +19,11 @@ public class CheckoutService {
         this.checkoutRepository = checkoutRepository;
     }
 
-    public CheckoutModel createCheckout(CheckoutModel checkoutModel) {
-
+    public CheckoutModel createCheckout(CheckoutModel checkoutModel, @RequestParam("dataSaida") LocalDate dataSaida) {
+        checkoutModel.setDataDaSaida(dataSaida);
         return checkoutRepository.save(checkoutModel);
     }
+
 
     public void deletaCheckout(Long id) {
         CheckoutModel checkoutModel = buscaCheckoutPorId(id);
@@ -57,18 +59,19 @@ public class CheckoutService {
 
 
     public Double calcularPrevisaoCustoHospedagem(CheckoutModel checkoutModel) {
-        LocalDate dataEntrada = checkoutModel.getCheckIn().getDataDaHospedagem();
-
+        CheckInModel checkIn = checkoutModel.getCheckIn();
+        LocalDate dataEntrada = checkIn.getDataDaHospedagem();
 
         long diasHospedagem = ChronoUnit.DAYS.between(dataEntrada, checkoutModel.getDataDaSaida());
-        double valorDiaria = checkoutModel.getCheckIn().getDiaria().getValor();
+        double valorDiaria = checkIn.getDiaria().getValor();
         double valorDiariaTotal = valorDiaria * diasHospedagem;
-        double valorGaragemDiaria = checkoutModel.getCheckIn().getVagaDeGaragem().getValor();
+        double valorGaragemDiaria = checkIn.getVagaDeGaragem().getValor();
         double valorGaragemTotal = valorGaragemDiaria * diasHospedagem;
         Double valorDaHospedagem = valorDiariaTotal + valorGaragemTotal;
 
         return valorDaHospedagem;
     }
+
 
 
 }

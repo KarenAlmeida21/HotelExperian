@@ -26,7 +26,6 @@ public class CheckInService {
                 .orElseThrow(() -> new HospedeNaoEncontradoException("Hóspede não encontrado"));
         checkInModel.setHospede(hospede);
         CheckInModel check = checkInRepository.save(checkInModel);
-
         return check;
     }
 
@@ -85,6 +84,9 @@ public class CheckInService {
         }
         return checkInModelOptional.get();
     }
+
+
+
 
 
     public void deletaCheckIn(Long id) {

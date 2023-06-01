@@ -15,6 +15,8 @@ public interface CheckInRepository extends JpaRepository<CheckInModel, Long> {
     Optional<CheckInModel> findByHospedeTelefone(String telefone);
 
     Optional<CheckInModel> findByHospedeNomeHospede(String nomeHospede);
+
+   //
 }
 
 

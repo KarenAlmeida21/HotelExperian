@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
@@ -20,9 +21,10 @@ public class CheckoutModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
-    @JoinColumn(name = "check_in_id")
+    @JoinColumn(name = "check_in_id", nullable = false)
     private CheckInModel checkIn;
-    private LocalDate dataDaSaida = LocalDate.now();
+    @NotNull
+    private LocalDate dataDaSaida;
 
 
 }
