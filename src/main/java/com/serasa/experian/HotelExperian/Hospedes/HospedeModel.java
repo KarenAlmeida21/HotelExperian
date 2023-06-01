@@ -1,5 +1,6 @@
 package com.serasa.experian.HotelExperian.Hospedes;
 
+import com.serasa.experian.HotelExperian.enums.EstadoHospede;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
