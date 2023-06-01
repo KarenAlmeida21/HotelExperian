@@ -38,7 +38,7 @@ public class HospedeService {
 
     public List<HospedeModel> exibirTodosHospede() {
         List<HospedeModel> hospedeList = hospedeRepository.findAll();
-        if(hospedeList.isEmpty()){
+        if (hospedeList.isEmpty()) {
             throw new HospedeNaoEncontradoException("Não Há hospede cadastrados");
         }
         return hospedeList;
@@ -54,10 +54,12 @@ public class HospedeService {
         hospedeRepository.delete(hospede);
     }
 
+
     public HospedeModel buscaHospedePorDocumento(String documento) {
-        Optional<HospedeModel> hospedeOptional = hospedeRepository.findByDocumento(documento);
-        return hospedeOptional.orElseThrow(() -> new HospedeNaoEncontradoException("Documento não encontrado"));
+        return hospedeRepository.findByDocumento(documento)
+                .orElseThrow(() -> new HospedeNaoEncontradoException("Documento não encontrado"));
     }
+
 
     public HospedeModel atualizaHospede(String documento, HospedeDTO hospedeDTO) {
         HospedeModel hospede = buscaHospedePorDocumento(documento);
@@ -69,7 +71,6 @@ public class HospedeService {
 
         return hospedeRepository.save(hospede);
     }
-
 
 
 }

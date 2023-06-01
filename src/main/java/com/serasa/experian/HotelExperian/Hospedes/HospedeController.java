@@ -1,14 +1,12 @@
 package com.serasa.experian.HotelExperian.Hospedes;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/hospedes")
@@ -47,7 +45,12 @@ public class HospedeController {
 
     }
 
-
+    @PutMapping("atualizar-hospede/{documento}")
+    public HospedeDTO atualizaCadastro(@PathVariable String documento,
+                                       @RequestBody HospedeDTO hospede) {
+        HospedeModel hospedeModel = hospedeService.atualizaHospede(documento, hospede);
+        return modelMapper.map(hospedeModel, HospedeDTO.class);
+    }
 
 
 }
