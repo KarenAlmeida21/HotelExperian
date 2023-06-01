@@ -20,7 +20,6 @@ public class HospedeService {
     public HospedeModel cadastraHospede(HospedeModel hospede) {
         verificaHospedePorNome(hospede.getNomeHospede());
         verificaDocumentoHospede(hospede.getDocumento());
-        hospede.setEstadoHospede(EstadoHospede.PRESENTE);
 
         return hospedeRepository.save(hospede);
     }

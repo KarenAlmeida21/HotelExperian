@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Getter
 @Setter
 
@@ -22,7 +23,7 @@ public class CheckInModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "hospede_id", nullable = false)
     private HospedeModel hospede;
     private LocalDate dataDaHospedagem = LocalDate.now();
     private LocalDate previsaoDeSaida;
