@@ -1,7 +1,10 @@
 package com.serasa.experian.HotelExperian.Hospedes;
 
 import com.serasa.experian.HotelExperian.exceptions.HospedeJaCadastradoException;
+import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HospedeService {
@@ -30,6 +33,16 @@ public class HospedeService {
             throw new HospedeJaCadastradoException("Hóspede com o mesmo documento já cadastrado.");
         }
     }
+
+
+    public List<HospedeModel> exibirTodosHospede() {
+        List<HospedeModel> hospedeList = hospedeRepository.findAll();
+        if(hospedeList.isEmpty()){
+            throw new HospedeNaoEncontradoException("Não Há hospede cadastrados");
+        }
+        return hospedeList;
+    }
+
 
 
 

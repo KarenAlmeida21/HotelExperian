@@ -1,9 +1,12 @@
 package com.serasa.experian.HotelExperian.Hospedes;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/hospedes")
@@ -18,9 +21,21 @@ public class HospedeController {
     }
 
     @PostMapping("/cadastrar-hospede")
-    public HospedeModel cadastrarHospede(HospedeDTO hospedeDTO) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public HospedeModel cadastrarHospede(@RequestBody HospedeDTO hospedeDTO) {
         HospedeModel novoHospede = modelMapper.map(hospedeDTO, HospedeModel.class);
         return hospedeService.cadastraHospede(novoHospede);
+    }
+
+    @Transactional
+    @GetMapping("/listar-hospedes")
+    public List<HospedeDTO> exibirHospedeList() {
+        List<HospedeDTO> hospedesList = new ArrayList<>();
+        for (HospedeModel hospedeReferencia : hospedeService.exibirTodosHospede()) {
+            HospedeDTO hospedeDTO = modelMapper.map(hospedeReferencia, HospedeDTO.class);
+            hospedesList.add(hospedeDTO);
+        }
+        return hospedesList;
     }
 
 

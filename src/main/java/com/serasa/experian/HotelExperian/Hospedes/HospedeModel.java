@@ -15,8 +15,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HospedeModel {
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private String id;
+    private Long id;
     @Column(nullable = false, unique = true)
     private String documento;
     @Column(nullable = false, unique = true)
