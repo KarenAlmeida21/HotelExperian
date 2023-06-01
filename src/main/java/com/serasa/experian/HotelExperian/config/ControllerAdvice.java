@@ -54,6 +54,15 @@ public class ControllerAdvice {
 
     }
 
+    @ExceptionHandler(FuncionarioException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorMessage ErrorMessage(FuncionarioException exception){
+        return new ErrorMessage((exception.getMessage()));
+
+    }
+
+
+
     @ExceptionHandler(CheckoutNãoEncontrado.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage ErrorMessage(CheckoutNãoEncontrado exception){

@@ -20,6 +20,7 @@ public class HospedeService {
         this.checkInRepository = checkInRepository;
     }
 
+
     public HospedeModel cadastraHospede(HospedeModel hospede) {
         verificaHospedePorNome(hospede.getNomeHospede());
         verificaDocumentoHospede(hospede.getDocumento());
