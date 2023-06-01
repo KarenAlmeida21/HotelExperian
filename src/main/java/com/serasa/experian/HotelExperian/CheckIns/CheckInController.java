@@ -2,7 +2,6 @@ package com.serasa.experian.HotelExperian.CheckIns;
 
 import com.serasa.experian.HotelExperian.Hospedes.HospedeRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/check-ins")
@@ -53,6 +51,17 @@ public class CheckInController {
     @GetMapping("/hospede/{documento}")
     public CheckInModel buscaCheckInPorDocumentoHospede(@PathVariable String documento) {
         return checkInService.buscaCheckInPorDocumentoHospede(documento);
+    }
+
+    @GetMapping("/hospedes-presentes")
+    public List<CheckInModel> listarCheckInsComHospedesPresentes() {
+        return checkInService.listaCheckInsComHospedesPresentes();
+    }
+
+    @GetMapping("/calcular-previsao-custo/{id}")
+    public double calcularPrevisaoCustoHospedagem(@PathVariable Long id) {
+        CheckInModel checkInModel = checkInService.buscaCheckInPorId(id);
+        return checkInService.calcularPrevisaoCustoHospedagem(checkInModel);
     }
 
 
