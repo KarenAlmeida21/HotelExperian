@@ -21,7 +21,7 @@ public class ControllerAdvice {
         List<ErroValidacao> erros = new ArrayList<>();
 
         for (FieldError referencia : excecao.getFieldErrors()) {
-            ErroValidacao erroValidacao = new ErroValidacao(referencia.getDefaultMessage());
+            ErroValidacao erroValidacao = new ErroValidacao(referencia.getDefaultMessage(), excecao.getMessage() );
             erros.add(erroValidacao);
         }
         return erros;

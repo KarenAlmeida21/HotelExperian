@@ -4,11 +4,7 @@ import com.serasa.experian.HotelExperian.CheckIns.CheckInRepository;
 import com.serasa.experian.HotelExperian.exceptions.HospedeErrorException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeJaCadastradoException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoException;
-import org.modelmapper.spi.ErrorMessage;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.Optional;

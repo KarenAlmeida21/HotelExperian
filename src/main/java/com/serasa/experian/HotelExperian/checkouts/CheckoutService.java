@@ -46,8 +46,15 @@ public class CheckoutService {
     }
 
     public List<CheckoutModel> listarCheckoutsPorDocumentoHospede(String documento) {
-        return checkoutRepository.findByCheckInHospedeDocumento(documento);
+        List<CheckoutModel> checkouts = checkoutRepository.findByCheckInHospedeDocumento(documento);
+
+        if (checkouts.isEmpty()) {
+            throw new CheckoutNãoEncontrado("Nenhum checkout encontrado para o documento do hóspede: " + documento);
+        }
+
+        return checkouts;
     }
+
 
     public Double calcularPrevisaoCustoHospedagem(CheckoutModel checkoutModel) {
         LocalDate dataEntrada = checkoutModel.getCheckIn().getDataDaHospedagem();
