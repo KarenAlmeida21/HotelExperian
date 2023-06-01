@@ -1,6 +1,5 @@
 package com.serasa.experian.HotelExperian.checkouts;
 
-import com.serasa.experian.HotelExperian.CheckIns.CheckInModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

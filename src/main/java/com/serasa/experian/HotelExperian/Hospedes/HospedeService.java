@@ -1,7 +1,6 @@
 package com.serasa.experian.HotelExperian.Hospedes;
 
 import com.serasa.experian.HotelExperian.CheckIns.CheckInRepository;
-import com.serasa.experian.HotelExperian.enums.EstadoHospede;
 import com.serasa.experian.HotelExperian.exceptions.HospedeErrorException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeJaCadastradoException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoException;
