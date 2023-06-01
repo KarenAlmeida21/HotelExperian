@@ -1,5 +1,6 @@
 package com.serasa.experian.HotelExperian.Hospedes;
 
+import com.serasa.experian.HotelExperian.enums.EstadoHospede;
 import com.serasa.experian.HotelExperian.exceptions.HospedeJaCadastradoException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoException;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class HospedeService {
     public HospedeModel cadastraHospede(HospedeModel hospede) {
         verificaHospedePorNome(hospede.getNomeHospede());
         verificaDocumentoHospede(hospede.getDocumento());
+        hospede.setEstadoHospede(EstadoHospede.PRESENTE);
 
         return hospedeRepository.save(hospede);
     }
