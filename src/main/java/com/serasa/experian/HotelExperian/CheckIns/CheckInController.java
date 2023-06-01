@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/check-ins")
@@ -47,6 +48,11 @@ public class CheckInController {
             checKInDTOList.add(checKInDTO);
         }
         return checKInDTOList;
+    }
+
+    @GetMapping("/hospede/{documento}")
+    public CheckInModel buscaCheckInPorDocumentoHospede(@PathVariable String documento) {
+        return checkInService.buscaCheckInPorDocumentoHospede(documento);
     }
 
 

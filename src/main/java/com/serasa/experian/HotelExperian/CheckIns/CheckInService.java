@@ -6,12 +6,10 @@ import com.serasa.experian.HotelExperian.enums.EstadoHospede;
 import com.serasa.experian.HotelExperian.exceptions.CheckInNaoEncontradoException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CheckInService {
@@ -43,5 +41,15 @@ public class CheckInService {
             throw new CheckInNaoEncontradoException("Não há check-ins cadastrados");
         }
         return checkInModelList;
+    }
+
+    public CheckInModel buscaCheckInPorDocumentoHospede(String documentoHospede) {
+        Optional<CheckInModel> checkInModelOptional = checkInRepository.findByHospedeDocumento(
+                documentoHospede);
+        if (checkInModelOptional.isEmpty()) {
+            throw new CheckInNaoEncontradoException("Check-in não encontrado para o documento do hóspede: "
+                    + documentoHospede);
+        }
+        return checkInModelOptional.get();
     }
 }
