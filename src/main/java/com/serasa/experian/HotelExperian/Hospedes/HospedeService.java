@@ -5,6 +5,7 @@ import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoExceptio
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HospedeService {
@@ -43,6 +44,31 @@ public class HospedeService {
         return hospedeList;
     }
 
+    public void deletaHospede(String documento) {
+        Optional<HospedeModel> hospedeOptional = hospedeRepository.findByDocumento(documento);
+        if (hospedeOptional.isEmpty()) {
+            throw new HospedeNaoEncontradoException("Documento não encontrado");
+        }
+
+        HospedeModel hospede = hospedeOptional.get();
+        hospedeRepository.delete(hospede);
+    }
+
+    public HospedeModel buscaHospedePorDocumento(String documento) {
+        Optional<HospedeModel> hospedeOptional = hospedeRepository.findByDocumento(documento);
+        return hospedeOptional.orElseThrow(() -> new HospedeNaoEncontradoException("Documento não encontrado"));
+    }
+
+    public HospedeModel atualizaHospede(String documento, HospedeDTO hospedeDTO) {
+        HospedeModel hospede = buscaHospedePorDocumento(documento);
+        hospede.setEnderecoHospede(hospedeDTO.getEnderecoHospede());
+        hospede.setNomeHospede(hospedeDTO.getNomeHospede());
+        hospede.setIdade(hospedeDTO.getIdade());
+        hospede.setDocumento(hospedeDTO.getDocumento());
+        hospede.setTelefone(hospedeDTO.getTelefone());
+
+        return hospedeRepository.save(hospede);
+    }
 
 
 

@@ -8,5 +8,8 @@ import java.util.Optional;
 @Repository
 public interface HospedeRepository extends JpaRepository<HospedeModel, Long> {
     boolean existsByNomeHospede(String nome);
+
     boolean existsByDocumento(String documento);
+
+    Optional<HospedeModel> findByDocumento(String documento);
 }
