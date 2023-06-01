@@ -2,6 +2,7 @@ package com.serasa.experian.HotelExperian.CheckIns;
 
 import com.serasa.experian.HotelExperian.Hospedes.HospedeModel;
 import com.serasa.experian.HotelExperian.enums.Diaria;
+import com.serasa.experian.HotelExperian.enums.Quarto;
 
 import javax.persistence.*;
 import java.time.LocalDate;
