@@ -3,6 +3,14 @@
 ## Descrição
 O Hotel Serasa é um sistema de gerenciamento de hospedagem em um hotel fictício. Ele permite cadastrar hóspedes, realizar check-ins e check-outs, e calcular custos de hospedagem.
 
+## Funcionalidades
+O Hotel Serasa oferece as seguintes funcionalidades:
+Cadastro de hóspedes: Os usuários podem cadastrar informações de hóspedes, como nome, documento e telefone.
+Realização de check-in: Os usuários podem realizar o check-in de um hóspede, associando-o a um quarto e fornecendo informações sobre a data de entrada e saída.
+Busca de hóspedes: Os usuários podem buscar hóspedes com base em diferentes critérios, como documento, telefone ou nome.
+Cálculo de previsão de custo: Os usuários podem calcular a previsão de custo de uma estadia com base nas informações de check-in.
+Realização de check-out: Os usuários podem realizar o check-out de um hóspede, registrando a data e hora de saída.
+
 ## Tecnologias utilizadas
 - Spring Web
 - Java 11
@@ -48,4 +56,9 @@ O Hotel Serasa é um sistema de gerenciamento de hospedagem em um hotel fictíci
 Contribuições são sempre bem-vindas! Sinta-se à vontade para enviar pull requests e relatar problemas.
 
 ## Licença
-Este projeto está licenciado sob a licença [MIT](LICENSE).
+
+Hotel Serasa
+O Hotel Serasa é um sistema de gerenciamento de hospedagem em um hotel fictício. O projeto tem como objetivo proporcionar funcionalidades para cadastrar hóspedes, realizar check-ins e check-outs, e calcular custos de hospedagem.
+
+
+Listagem de check-outs: Os usuários podem visualizar a lista de check-outs realizados.
