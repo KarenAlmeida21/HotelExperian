@@ -105,7 +105,4 @@ public class HospedeServiceTest {
         verify(hospedeRepository, times(1)).findAll();
     }
 
-
-
-
 }

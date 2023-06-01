@@ -47,11 +47,25 @@ public class CheckInService {
     }
 
     public CheckInModel buscaCheckInPorDocumentoHospede(String documentoHospede) {
-        Optional<CheckInModel> checkInModelOptional = checkInRepository.findByHospedeDocumento(
-                documentoHospede);
+        Optional<CheckInModel> checkInModelOptional = checkInRepository.findByHospedeDocumento(documentoHospede);
         if (checkInModelOptional.isEmpty()) {
-            throw new CheckInNaoEncontradoException("Check-in não encontrado para o documento do hóspede: "
-                    + documentoHospede);
+            throw new CheckInNaoEncontradoException("Check-in não encontrado para o documento do hóspede: " + documentoHospede);
+        }
+        return checkInModelOptional.get();
+    }
+
+    public CheckInModel buscaCheckInPorTelefoneHospede(String telefoneHospede) {
+        Optional<CheckInModel> checkInModelOptional = checkInRepository.findByHospedeTelefone(telefoneHospede);
+        if (checkInModelOptional.isEmpty()) {
+            throw new CheckInNaoEncontradoException("Check-in não encontrado para o telefone do hóspede: " + telefoneHospede);
+        }
+        return checkInModelOptional.get();
+    }
+
+    public CheckInModel buscaCheckInPorNomeHospede(String nomeHospede) {
+        Optional<CheckInModel> checkInModelOptional = checkInRepository.findByHospedeNomeHospede(nomeHospede);
+        if (checkInModelOptional.isEmpty()) {
+            throw new CheckInNaoEncontradoException("Check-in não encontrado para o nome do hóspede: " + nomeHospede);
         }
         return checkInModelOptional.get();
     }

@@ -1,6 +1,7 @@
 package com.serasa.experian.HotelExperian.CheckIns;
 
 import com.serasa.experian.HotelExperian.Hospedes.HospedeRepository;
+import com.serasa.experian.HotelExperian.exceptions.CheckInNaoEncontradoException;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -46,9 +47,23 @@ public class CheckInController {
         return checKInDTOList;
     }
 
-    @GetMapping("/hospede/{documento}")
-    public CheckInModel buscaCheckInPorDocumentoHospede(@PathVariable String documento) {
+    @GetMapping("/busca-hospede-documento/{documento}")
+    public CheckInModel buscaCheckInPorDocumentoTelefone(@PathVariable String documento) {
         return checkInService.buscaCheckInPorDocumentoHospede(documento);
+    }
+
+    @GetMapping("/buscar-por-telefone/{telefone}")
+    public CheckInDTO buscarPorTelefone(@PathVariable String telefone) {
+            CheckInModel checkIn = checkInService.buscaCheckInPorTelefoneHospede(telefone);
+            CheckInDTO checkInDTO = modelMapper.map(checkIn, CheckInDTO.class);
+            return checkInDTO;
+    }
+
+    @GetMapping("/buscar-hospede-nome/{nomeHospede}")
+    public CheckInModel buscarCheckInPorNomeHospede(@PathVariable String nomeHospede) {
+            CheckInModel checkIn = checkInService.buscaCheckInPorNomeHospede(nomeHospede);
+            return checkIn;
+
     }
 
     @GetMapping("/hospedes-presentes")
