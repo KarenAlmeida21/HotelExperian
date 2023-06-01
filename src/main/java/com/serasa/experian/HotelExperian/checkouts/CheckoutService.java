@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,7 @@ public class CheckoutService {
         this.checkoutRepository = checkoutRepository;
     }
 
-    public CheckoutModel createCheckout(CheckoutModel checkoutModel, @RequestParam("dataSaida") LocalDate dataSaida) {
+    public CheckoutModel createCheckout(CheckoutModel checkoutModel, @RequestParam("dataSaida") LocalDateTime dataSaida) {
         checkoutModel.setDataDaSaida(dataSaida);
         return checkoutRepository.save(checkoutModel);
     }

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,5 +13,5 @@ public class CheckoutDTO {
     @NotNull
     private CheckInModel checkIn;
     @NotNull
-    private LocalDate dataDaSaida;
+    private LocalDateTime dataDaSaida;
 }

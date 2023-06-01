@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +25,14 @@ public class CheckoutController {
 
     @PostMapping("/realiza-checkout")
     @ResponseStatus(HttpStatus.CREATED)
-    public CheckoutModel realizaChecout(@RequestBody CheckoutDTO checkoutDTO) {
-        String dataStr = "10-07-2023";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate dataDaSaida = LocalDate.parse(dataStr, formatter);
+    public CheckoutModel realizaCheckout(@RequestBody CheckoutDTO checkoutDTO) {
+        LocalDateTime dataDaSaida = checkoutDTO.getDataDaSaida(); // Obtém a LocalDateTime do DTO
         CheckoutModel checkout = modelMapper.map(checkoutDTO, CheckoutModel.class);
         checkout.setDataDaSaida(dataDaSaida);
-        return checkoutService.createCheckout(checkout, checkout.getDataDaSaida());
+        return checkoutService.createCheckout(checkout, dataDaSaida);
     }
+
+
 
 
     @DeleteMapping("/deleta-checkout/{id}")
