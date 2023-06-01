@@ -40,6 +40,11 @@ public class CheckoutService {
         return checkoutModelOptional.get();
     }
 
+    public List<CheckoutModel> listarCheckoutsPorDocumentoHospede(String documento) {
+        return checkoutRepository.findByCheckInHospedeDocumento(documento);
+    }
+
+
 
 
 

@@ -42,4 +42,9 @@ public class CheckoutController {
         }
         return checkoutDTOList;
     }
+
+    @GetMapping("/documento-hospede/{documento}")
+    public List<CheckoutModel> listarCheckoutsPorDocumentoHospede(@PathVariable String documento) {
+        return checkoutService.listarCheckoutsPorDocumentoHospede(documento);
+    }
 }
