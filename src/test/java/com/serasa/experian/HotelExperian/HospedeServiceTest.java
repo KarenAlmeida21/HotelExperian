@@ -3,6 +3,8 @@ package com.serasa.experian.HotelExperian;
 import com.serasa.experian.HotelExperian.Hospedes.HospedeModel;
 import com.serasa.experian.HotelExperian.Hospedes.HospedeRepository;
 import com.serasa.experian.HotelExperian.Hospedes.HospedeService;
+import com.serasa.experian.HotelExperian.exceptions.HospedeJaCadastradoException;
+import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +13,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -56,4 +61,23 @@ public class HospedeServiceTest {
     }
 
 
+    @Test
+    public void cadastraHospedeNomeJaCadastradoException() {
+        HospedeModel hospede = new HospedeModel();
+        hospede.setDocumento("123456789");
+        hospede.setNomeHospede("John Doe");
+        hospede.setTelefone("1234567890");
+
+        when(hospedeRepository.existsByDocumento(anyString())).thenReturn(true);
+
+        assertThrows(HospedeJaCadastradoException.class, () -> hospedeService.cadastraHospede(hospede));
+
+        verify(hospedeRepository, times(1)).existsByDocumento(anyString());
+        verify(hospedeRepository, never()).existsByTelefone(anyString());
+        verify(hospedeRepository, never()).save(any(HospedeModel.class));
     }
+
+
+
+
+}
