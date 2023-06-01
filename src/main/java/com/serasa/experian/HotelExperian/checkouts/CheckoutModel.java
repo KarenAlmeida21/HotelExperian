@@ -22,7 +22,7 @@ public class CheckoutModel {
     @OneToOne
     @JoinColumn(name = "check_in_id")
     private CheckInModel checkIn;
-    private LocalDate dataDaSaSaida = LocalDate.now();
-    private Double valorDaHospedagem;
+    private LocalDate dataDaSaida = LocalDate.now();
+
 
 }

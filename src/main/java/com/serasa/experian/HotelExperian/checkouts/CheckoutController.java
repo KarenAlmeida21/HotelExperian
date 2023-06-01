@@ -1,15 +1,18 @@
 package com.serasa.experian.HotelExperian.checkouts;
 
+import com.serasa.experian.HotelExperian.CheckIns.CheckInModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/checkouts")
 public class CheckoutController {
+
     private CheckoutService checkoutService;
     private ModelMapper modelMapper;
 
@@ -22,7 +25,7 @@ public class CheckoutController {
     @ResponseStatus(HttpStatus.CREATED)
     public CheckoutModel realizaChecout(@RequestBody CheckoutDTO checkoutDTO) {
         CheckoutModel checkout = modelMapper.map(checkoutDTO, CheckoutModel.class);
-
+        checkout.setDataDaSaida(LocalDate.now());
         return checkoutService.createCheckout(checkout);
 
     }
@@ -46,5 +49,11 @@ public class CheckoutController {
     @GetMapping("/documento-hospede/{documento}")
     public List<CheckoutModel> listarCheckoutsPorDocumentoHospede(@PathVariable String documento) {
         return checkoutService.listarCheckoutsPorDocumentoHospede(documento);
+    }
+
+    @GetMapping("/calcular-valor-hospedagem/{id}")
+    public double calculaValorDaHospedagem(@PathVariable Long id) {
+        CheckoutModel checkoutModel = checkoutService.buscaCheckoutPorId(id);
+        return checkoutService.calcularPrevisaoCustoHospedagem(checkoutModel);
     }
 }

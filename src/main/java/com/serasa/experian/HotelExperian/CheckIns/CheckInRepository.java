@@ -8,4 +8,6 @@ import java.util.Optional;
 @Repository
 public interface CheckInRepository extends JpaRepository<CheckInModel, Long> {
     Optional<CheckInModel> findByHospedeDocumento(String documentoHospede);
+
+    boolean existsByHospedeDocumento(String documentoHospede);
 }

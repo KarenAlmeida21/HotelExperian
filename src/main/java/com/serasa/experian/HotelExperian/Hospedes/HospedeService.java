@@ -1,6 +1,8 @@
 package com.serasa.experian.HotelExperian.Hospedes;
 
+import com.serasa.experian.HotelExperian.CheckIns.CheckInRepository;
 import com.serasa.experian.HotelExperian.enums.EstadoHospede;
+import com.serasa.experian.HotelExperian.exceptions.HospedeErrorException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeJaCadastradoException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoException;
 import org.springframework.stereotype.Service;
@@ -12,9 +14,11 @@ import java.util.Optional;
 public class HospedeService {
 
     private HospedeRepository hospedeRepository;
+    private CheckInRepository checkInRepository;
 
-    public HospedeService(HospedeRepository hospedeRepository) {
+    public HospedeService(HospedeRepository hospedeRepository, CheckInRepository checkInRepository) {
         this.hospedeRepository = hospedeRepository;
+        this.checkInRepository = checkInRepository;
     }
 
     public HospedeModel cadastraHospede(HospedeModel hospede) {
@@ -50,7 +54,10 @@ public class HospedeService {
         if (hospedeOptional.isEmpty()) {
             throw new HospedeNaoEncontradoException("Documento não encontrado");
         }
+        if (checkInRepository.existsByHospedeDocumento(documento)) {
+            throw new HospedeErrorException("Este hospede está vinculado a um check-in. Verifique");
 
+        }
         HospedeModel hospede = hospedeOptional.get();
         hospedeRepository.delete(hospede);
     }

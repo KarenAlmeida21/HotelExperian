@@ -72,6 +72,13 @@ public class CheckInService {
         return checkInModelOptional.get();
     }
 
+
+    public void deletaCheckIn(Long id) {
+        CheckInModel checkInModel = buscaCheckInPorId(id);
+        marcaHospedeComoAusente(checkInModel);
+        checkInRepository.deleteById(id);
+    }
+
     public double calcularPrevisaoCustoHospedagem(CheckInModel checkInModel) {
         LocalDate dataEntrada = checkInModel.getDataDaHospedagem();
         LocalDate dataSaida = checkInModel.getPrevisaoDeSaida();

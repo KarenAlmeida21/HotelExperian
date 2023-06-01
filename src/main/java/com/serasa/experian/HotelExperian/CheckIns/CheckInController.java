@@ -30,7 +30,6 @@ public class CheckInController {
         CheckInModel checkInModel = modelMapper.map(check, CheckInModel.class);
         checkInModel.setDataDaHospedagem(LocalDate.now());
 
-        @NotBlank Long hospedeId = check.getHospede().getId();
         CheckInModel checkIn = modelMapper.map(check, CheckInModel.class);
         checkInModel.setDataDaHospedagem(LocalDate.now());
 
@@ -62,6 +61,12 @@ public class CheckInController {
     public double calcularPrevisaoCustoHospedagem(@PathVariable Long id) {
         CheckInModel checkInModel = checkInService.buscaCheckInPorId(id);
         return checkInService.calcularPrevisaoCustoHospedagem(checkInModel);
+    }
+
+    @DeleteMapping("/deleta/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletaCheckIn(@PathVariable Long id) {
+        checkInService.deletaCheckIn(id);
     }
 
 
