@@ -4,10 +4,19 @@ import com.serasa.experian.HotelExperian.Hospedes.HospedeModel;
 import com.serasa.experian.HotelExperian.enums.Diaria;
 import com.serasa.experian.HotelExperian.enums.Quarto;
 import com.serasa.experian.HotelExperian.enums.VagaDeGaragem;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+@Getter
+@Setter
 
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class CheckInModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
