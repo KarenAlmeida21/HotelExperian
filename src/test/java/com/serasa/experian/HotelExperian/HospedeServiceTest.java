@@ -78,6 +78,34 @@ public class HospedeServiceTest {
     }
 
 
+    @Test
+    public void exibirTodosHospedeException() {
+        when(hospedeRepository.findAll()).thenReturn(new ArrayList<>());
+
+        assertThrows(HospedeNaoEncontradoException.class, () -> hospedeService.exibirTodosHospede());
+
+        verify(hospedeRepository, times(1)).findAll();
+    }
+
+    @Test
+    void exibirTodosHospedeComSucesso() {
+        List<HospedeModel> hospedeList = new ArrayList<>();
+        hospedeList.add(new HospedeModel());
+
+        hospedeList.add(new HospedeModel());
+        hospedeList.add(new HospedeModel());
+
+        when(hospedeRepository.findAll()).thenReturn(hospedeList);
+
+        List<HospedeModel> result = hospedeService.exibirTodosHospede();
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+
+        verify(hospedeRepository, times(1)).findAll();
+    }
+
+
 
 
 }
