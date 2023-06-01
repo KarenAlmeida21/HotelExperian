@@ -12,4 +12,8 @@ public interface HospedeRepository extends JpaRepository<HospedeModel, Long> {
     boolean existsByDocumento(String documento);
 
     Optional<HospedeModel> findByDocumento(String documento);
+
+    boolean findByTelefone(String telefone);
+
+    boolean existsByTelefone(String telefone);
 }

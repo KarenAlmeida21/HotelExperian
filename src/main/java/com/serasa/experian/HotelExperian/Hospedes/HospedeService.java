@@ -4,7 +4,11 @@ import com.serasa.experian.HotelExperian.CheckIns.CheckInRepository;
 import com.serasa.experian.HotelExperian.exceptions.HospedeErrorException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeJaCadastradoException;
 import com.serasa.experian.HotelExperian.exceptions.HospedeNaoEncontradoException;
+import org.modelmapper.spi.ErrorMessage;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +27,7 @@ public class HospedeService {
     public HospedeModel cadastraHospede(HospedeModel hospede) {
         verificaHospedePorNome(hospede.getNomeHospede());
         verificaDocumentoHospede(hospede.getDocumento());
+        verificaHospedePorTelefone(hospede.getTelefone());
 
         return hospedeRepository.save(hospede);
     }
@@ -32,6 +37,13 @@ public class HospedeService {
             throw new HospedeJaCadastradoException("Hospede com o mesmo nome já cadastrado.");
         }
     }
+
+    public void verificaHospedePorTelefone(String telefone) {
+        if (hospedeRepository.existsByTelefone(telefone)) {
+            throw new HospedeJaCadastradoException("Hóspede com o mesmo telefone já cadastrado.");
+        }
+    }
+
 
     public void verificaDocumentoHospede(String documento) {
         if (hospedeRepository.existsByDocumento(documento)) {
